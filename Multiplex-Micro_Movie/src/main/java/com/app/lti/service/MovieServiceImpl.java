@@ -45,12 +45,14 @@ public class MovieServiceImpl implements MovieService {
 	
 	 //delete by movie using userId
 	@Override
-	public void deleteMovieById(String movieId) {
-		// TODO Auto-generated method stub
-		
-		movieRepository.deleteById(movieId);
-		
-	} 
+	public boolean deleteMovie(String movieId) {
+		if (movieRepository.existsById(movieId)) {
+			  movieRepository.deleteById(movieId); return true; 
+			  } else { 
+				  return false; 
+				  }
+	}
+		 
 		
 	//delete All user Account
 	 @Override
@@ -66,5 +68,7 @@ public class MovieServiceImpl implements MovieService {
 		movieDocument.setMovieId(movieId);
 		return movieRepository.save(movieDocument);
 	}
+
+	
 
 }

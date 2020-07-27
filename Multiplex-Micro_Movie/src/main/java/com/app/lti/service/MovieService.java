@@ -13,7 +13,7 @@ public interface MovieService {
 
 	public List<MovieDocument> findAllMovies();
 
-	public void deleteMovieById(String movieId);
+	public boolean deleteMovie(String movieId);
 
 	public void deleteAll();
 

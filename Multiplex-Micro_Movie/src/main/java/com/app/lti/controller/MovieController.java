@@ -52,13 +52,19 @@ public class MovieController {
 			new ResponseEntity<MovieDocument>(HttpStatus.FOUND);
 			return ResponseEntity.ok(service.findAllMovies());
 		}
+		
+		@DeleteMapping(path = "/delete/{movieId}")
+		public ResponseEntity<String> deleteMovie(@PathVariable String movieId) {
+			ResponseEntity<String> response;
+			if (this.service.deleteMovie(movieId)) {
+				response = new ResponseEntity<String>("Moive deleted successfully", HttpStatus.OK);
+			} else {
+				response = new ResponseEntity<String>("Movie not present in system", HttpStatus.NOT_FOUND);
+			}
 
-		@DeleteMapping(path="/deleteById/{movieId}", produces = "application/json")
-		public void deleteMoviesByUsingId(@PathVariable(value = "movieId") String movieId) {
-			
-			service.deleteMovieById(movieId);
-
+			return response;
 		}
+		
 
 		@DeleteMapping("/deleteAll")
 		public void deleteAll(MovieDocument movieDocument) {
